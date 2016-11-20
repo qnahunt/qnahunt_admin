@@ -32,4 +32,4 @@ production:
   database: qunahunt_production
   username: qnahunt
   password: selva_kalish_2016
-  host: localhost
+  host: postgresql-aerodynamic-49641
