@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161120115730) do
+ActiveRecord::Schema.define(version: 20161120122659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,16 @@ ActiveRecord::Schema.define(version: 20161120115730) do
     t.datetime "updated_at"
   end
 
+  create_table "question_spams", force: true do |t|
+    t.integer  "question_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "question_spams", ["question_id"], name: "index_question_spams_on_question_id", using: :btree
+  add_index "question_spams", ["user_id"], name: "index_question_spams_on_user_id", using: :btree
+
   create_table "question_tags", force: true do |t|
     t.integer  "question_id"
     t.integer  "tag_id"
@@ -116,10 +126,11 @@ ActiveRecord::Schema.define(version: 20161120115730) do
     t.string   "title",           limit: nil
     t.text     "description"
     t.boolean  "is_open"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "sub_category_id"
     t.boolean  "is_active",                   default: true
+    t.boolean  "is_spam",                     default: false
   end
 
   add_index "questions", ["sub_category_id"], name: "index_questions_on_sub_category_id", using: :btree
