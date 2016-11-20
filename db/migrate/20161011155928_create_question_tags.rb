@@ -1,4 +1,4 @@
-class CreateQuestionTags < ActiveRecord::Migration[5.0]
+class CreateQuestionTags < ActiveRecord::Migration
   def change
     create_table :question_tags do |t|
       t.references :question, foreign_key: true

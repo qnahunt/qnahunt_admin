@@ -21,12 +21,9 @@ ActiveRecord::Schema.define(version: 20161120122659) do
     t.integer  "user_id"
     t.integer  "up_count"
     t.integer  "down_count"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "accepted_answers", ["answer_id"], name: "index_accepted_answers_on_answer_id", using: :btree
-  add_index "accepted_answers", ["user_id"], name: "index_accepted_answers_on_user_id", using: :btree
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -66,23 +63,14 @@ ActiveRecord::Schema.define(version: 20161120122659) do
     t.integer  "question_id"
     t.text     "answer"
     t.boolean  "is_answered"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
-  add_index "answers", ["user_id"], name: "index_answers_on_user_id", using: :btree
-
-  create_table "ar_internal_metadata", primary_key: "key", force: true do |t|
-    t.string   "value",      limit: nil
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "categories", force: true do |t|
-    t.string   "name",       limit: nil
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "common_configs", force: true do |t|
@@ -104,37 +92,28 @@ ActiveRecord::Schema.define(version: 20161120122659) do
   create_table "question_spams", force: true do |t|
     t.integer  "question_id"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "question_spams", ["question_id"], name: "index_question_spams_on_question_id", using: :btree
-  add_index "question_spams", ["user_id"], name: "index_question_spams_on_user_id", using: :btree
 
   create_table "question_tags", force: true do |t|
     t.integer  "question_id"
     t.integer  "tag_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "question_tags", ["question_id"], name: "index_question_tags_on_question_id", using: :btree
-  add_index "question_tags", ["tag_id"], name: "index_question_tags_on_tag_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.integer  "user_id"
-    t.string   "title",           limit: nil
+    t.string   "title"
     t.text     "description"
     t.boolean  "is_open"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "sub_category_id"
-    t.boolean  "is_active",                   default: true
-    t.boolean  "is_spam",                     default: false
+    t.boolean  "is_active",       default: true
+    t.boolean  "is_spam",         default: false
   end
-
-  add_index "questions", ["sub_category_id"], name: "index_questions_on_sub_category_id", using: :btree
-  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
 
   create_table "rewards", force: true do |t|
     t.string   "task"
@@ -146,18 +125,16 @@ ActiveRecord::Schema.define(version: 20161120122659) do
   end
 
   create_table "sub_categories", force: true do |t|
-    t.string   "name",        limit: nil
+    t.string   "name"
     t.integer  "category_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "sub_categories", ["category_id"], name: "index_sub_categories_on_category_id", using: :btree
-
   create_table "tags", force: true do |t|
-    t.string   "name",       limit: nil
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_rewards", force: true do |t|
@@ -171,21 +148,21 @@ ActiveRecord::Schema.define(version: 20161120122659) do
   add_index "user_rewards", ["user_id"], name: "index_user_rewards_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                  limit: nil, default: "", null: false
-    t.string   "encrypted_password",     limit: nil, default: "", null: false
-    t.string   "name",                   limit: nil
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "name"
     t.integer  "age"
-    t.string   "mobile",                 limit: nil
-    t.string   "reset_password_token",   limit: nil
+    t.string   "mobile"
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "authentication_token",   limit: nil
-    t.integer  "rewards",                            default: 0
+    t.string   "authentication_token"
+    t.integer  "rewards",                default: 0
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree

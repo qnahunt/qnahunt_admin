@@ -1,4 +1,4 @@
-class AddIsSpamToQuestions < ActiveRecord::Migration[5.0]
+class AddIsSpamToQuestions < ActiveRecord::Migration
   def change
     add_column :questions, :is_spam, :boolean, :default => false
   end

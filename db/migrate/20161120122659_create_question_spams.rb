@@ -1,4 +1,4 @@
-class CreateQuestionSpams < ActiveRecord::Migration[5.0]
+class CreateQuestionSpams < ActiveRecord::Migration
   def change
     create_table :question_spams do |t|
       t.references :question, foreign_key: true

@@ -32,4 +32,4 @@ production:
   database: qunahunt_production
   username: qnahunt
   password: selva_kalish_2016
-  host: postgresql-solid-12149
+  host: postgresql-colorful-99654

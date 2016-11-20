@@ -1,4 +1,4 @@
-class CreateAcceptedAnswers < ActiveRecord::Migration[5.0]
+class CreateAcceptedAnswers < ActiveRecord::Migration
   def change
     create_table :accepted_answers do |t|
       t.references :answer, foreign_key: true
