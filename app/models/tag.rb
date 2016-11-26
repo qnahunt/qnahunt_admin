@@ -1,3 +1,3 @@
 class Tag < ApplicationRecord
-  belongs_to :question
+  has_many :question_tags
 end
