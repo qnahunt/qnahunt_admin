@@ -4,6 +4,6 @@ class Question < ApplicationRecord
   has_many :answers
   has_many :tags
   has_many :question_tags
-  accepts_nested_attributes_for :answers, :allow_destroy => true
-  accepts_nested_attributes_for :question_tags, :allow_destroy => true
+  attr_accessor :tag
+  accepts_nested_attributes_for :answers, reject_if: :all_blank, allow_destroy: true
 end

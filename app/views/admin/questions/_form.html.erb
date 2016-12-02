@@ -1,0 +1,44 @@
+<%= semantic_form_for [:admin, @question] do |f| %>
+    <%= f.semantic_errors %>
+
+    <%= f.inputs name: "Question" do %>
+        <%= f.input :title %>
+        <%= f.input :description %>
+        <%= f.input :tag, :input_html=>{:value=>@tags} %>
+
+    <% end %>
+
+
+
+    <fieldset class="inputs">
+      <ol>
+        <li data-sortable-start="0" class="has_many_container answers">
+          <h3>Add Answers</h3>
+          <fieldset class="inputs has_many_fields">
+            <% @question.answers.each_with_index do |answer, index|  %>
+                <ol>
+                  <li id="question_answers_attributes_<%= index %>_answer_input" class="text input optional">
+                    <label for="question_answers_attributes_<%= index %>_answer" class="label">Answer</label>
+                    <textarea rows="20" name="question[answers_attributes][<%= index%>][answer]"
+                              id="question_answers_attributes_<%= index %>_answer"><%= answer.answer %></textarea>
+                  </li>
+                    <li id="question_answers_attributes_<%= index %>__destroy_input" class="has_many_delete boolean
+                    input
+                    optional"><input type="hidden" value='1' name="question[answers_attributes][<%= index%>][_destroy]">
+                      <label for="question_answers_attributes_<%= index %>__destroy" class="">
+                        <input type="checkbox" value="1" name="question[answers_attributes][<%= index%>[_destroy]"
+                               id="question_answers_attributes_<%= index %>__destroy">Delete</label>
+                  </li>
+                </ol>
+            <% end %>
+          </fieldset>
+          <input type="hidden" value="<%= @next_question %>" name="question[answers_attributes][<%= @next_question
+           %>][id]"
+                                        id="question_answers_attributes_<%= @next_question %>_id">
+          <a href="#" data-placeholder="NEW_ANSWER_RECORD" data-html="&lt;fieldset class=&quot;inputs has_many_fields&quot;&gt;&lt;ol&gt;&lt;li class=&quot;text input optional&quot; id=&quot;question_answers_attributes_NEW_ANSWER_RECORD_answer_input&quot;&gt;&lt;label class=&quot;label&quot; for=&quot;question_answers_attributes_NEW_ANSWER_RECORD_answer&quot;&gt;Answer&lt;/label&gt;&lt;textarea id=&quot;question_answers_attributes_NEW_ANSWER_RECORD_answer&quot; name=&quot;question[answers_attributes][NEW_ANSWER_RECORD][answer]&quot; rows=&quot;20&quot;&gt;
+&lt;/textarea&gt;
+
+&lt;/li&gt;&lt;li&gt;&lt;a class=&quot;button has_many_remove&quot; href=&quot;#&quot;&gt;Remove&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/fieldset&gt;" class="button has_many_add">Add New Answer</a></li></ol></fieldset>
+
+    <%= f.actions %>
+<% end %>
