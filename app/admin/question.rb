@@ -1,5 +1,5 @@
 ActiveAdmin.register Question do
-permit_params :title, :description, :sub_category_id, :is_open, :user_id, :id, :tags,
+permit_params :title, :description, :sub_category_id, :is_open, :user_id, :id, :tag,
               answers_attributes: [ :id, :answer, :is_answered, :_destroy ]
 
 form do |f|
@@ -34,18 +34,22 @@ controller do
 
   def create
     super do |format|
-      if params[:question][:tag].present?
-        tags = params[:question][:tags].split(',').collect(&:strip)
+      if params[:question][:user_id].present? && params[:question][:sub_category_id].present? && params[:question][:tag].present?
+        tags = params[:question][:tag].split(',').collect(&:strip)
         self.tag_management(resource, tags)
+      else
+        flash[:alert] = "Make sure you have selected User, Sub category & Tags"
       end
       resource.answers.update_all(:user_id=>params[:question][:user_id])
     end
   end
   def update
     super do |format|
-      if params[:question][:tag].present?
+      if params[:question][:user_id].present? && params[:question][:sub_category_id].present? && params[:question][:tag].present?
        tags = params[:question][:tag].split(',').collect(&:strip)
        self.tag_management(resource, tags)
+      else
+       flash[:alert] = "Make sure you have selected User, Sub category & Tags"	
       end
       resource.answers.update_all(:user_id=>params[:question][:user_id])
     end
